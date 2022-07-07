@@ -32,5 +32,5 @@ def merge2excel(dir_path, output_file='merge2excel.xlsx'):
 
 # 同一个excel里的不同sheet，拆分为不同的excel文件
 @except_dec()
-def sheet2excel(file_path):
-    mainExcel.sheet2excel(file_path)
+def sheet2excel(file_path,out_path): # out_path 导出路径文件夹
+    mainExcel.sheet2excel(file_path,out_path)

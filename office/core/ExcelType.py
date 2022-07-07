@@ -75,7 +75,7 @@ class MainExcel():
                     file_path_dict[file] = (path / file)
         return file_path_dict
 
-    def sheet2excel(self, file_path):
+    def sheet2excel(self, file_path, out_path):  # out_path 导出路径文件夹
         # 先读取一次文件，获取sheet表的名称
 
         origin_excel = load_workbook(filename=file_path)  # 读取原excel文件
@@ -90,14 +90,15 @@ class MainExcel():
                 wb = load_workbook(filename=file_path)  # 再读取一次文件，由于每次删除后需要保存一次，所以不能与上一次一样
                 sheet = wb[origin_sheet_names[j]]
                 wb.copy_worksheet(sheet)
-
-                new_filename = origin_sheet_names[j] + '.xlsx'  # 新建一个sheet命名的excel文件
+                # 新增导出文件夹+sheet名称拼接为新的excel地址
+                new_filename = out_path + '\\' + origin_sheet_names[j] + '.xlsx'  # 新建一个sheet命名的excel文件
 
                 for i in range(len(origin_sheet_names)):
                     sheet1 = wb[origin_sheet_names[i]]
                     wb.remove(sheet1)
 
                 wb.save(filename=new_filename)
+                print(new_filename + '保存成功')
 
                 # 由于使用copy_worksheet后，sheet表名有copy字段，这里做个调整
 
